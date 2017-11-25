@@ -6,3 +6,5 @@ function print1To255(){
         console.log(i)
     }
 }
+
+print1To255()
