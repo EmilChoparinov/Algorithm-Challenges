@@ -1,5 +1,5 @@
 /**
- * Prints all numbers 1 to 255
+ * Prints all odd numbers 1 to 255
  */
 function printOdds1To255(){
     for(let i = 1; i <=255; i++){
@@ -8,3 +8,5 @@ function printOdds1To255(){
         }
     }
 }
+
+printOdds1To255()
