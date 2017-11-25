@@ -1,3 +1,7 @@
+/**
+ * finds the angle of the hands in degrees by time past from initial 12:00:00
+ * @param {Number} seconds total seconds passed from 12:00:00
+ */
 function clockHandAngles(seconds){
     let dMin = seconds / 60;
     let dHour = dMin / 60;
