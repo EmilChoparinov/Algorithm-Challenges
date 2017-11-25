@@ -1,3 +1,7 @@
+/**
+ * Get the sum from a bunch of condition
+ * @param {Number} num number to do some math on
+ */
 function messyMath(num){
     let sum = 0;
     for(let i = 0; i <= num; i++){
