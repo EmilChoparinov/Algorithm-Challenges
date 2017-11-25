@@ -1,3 +1,8 @@
+/**
+ * Grab the last few elements of the array from arr.length to arr.length - num
+ * @param {Array} arr an array
+ * @param {Number} num the new length of the array
+ */
 function shortArray(arr, num){
     if(arr instanceof Array){
         let byI = 0;
