@@ -1,3 +1,7 @@
+/**
+ * Reverses an array in place
+ * @param {Array} arr an array
+ */
 function reverseArray(arr){
     if(arr instanceof Array){
         for(let i = 0; i < arr.length/2; i++){
