@@ -1,3 +1,7 @@
+/**
+ * Shifts all array values to the left 
+ * @param {Array} arr shifts array values to the left
+ */
 function shiftArrayValsLeft(arr){
     if(arr instanceof Array){
         let lastNum = arr[arr.length - 1]
