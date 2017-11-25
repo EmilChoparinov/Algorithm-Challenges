@@ -1,3 +1,7 @@
+/**
+ * Swaps toward the center but only evens
+ * @param {Array} arr an array
+ */
 function swapTowardCenter(arr) {
     if (arr instanceof Array) {
         for (let i = 0; i < arr.length / 2; i++) {
