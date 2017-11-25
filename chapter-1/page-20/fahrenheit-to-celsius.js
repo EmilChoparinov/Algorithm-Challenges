@@ -3,6 +3,6 @@
  * @param {Number} cDegrees degress in celsius
  * @returns {Number} fahrenheit degress
  */
-function celsiusToFahrenheit(cDegrees){
-    return (cDegrees * 9/5) + 32;
+function fahrenheitToCelsius(fDegrees){
+    return (fDegrees - 32)*5/9;
 }
