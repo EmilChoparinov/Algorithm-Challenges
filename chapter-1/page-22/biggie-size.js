@@ -1,6 +1,6 @@
 /**
  * A funciton that changes all positive numbers in the array to 'big'
- * @param {Number} arr an array
+ * @param {Array} arr an array
  */
 function makeBiggie(arr){
     if(arr instanceof Array){
