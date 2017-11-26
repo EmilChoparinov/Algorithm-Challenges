@@ -11,7 +11,7 @@ function secondLargest(arr) {
                 max[1] = i;
             } 
         }
-        arr[max[1]] = -Infinity;
+        arr[max[1]] = null;
         let nextMax = arr[0];
         for(let i = 0; i < arr.length; i++){
             if(max[0] - arr[i] < max[0] - nextMax && arr[i] != max[0]){
