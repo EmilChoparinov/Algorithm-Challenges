@@ -1,3 +1,7 @@
+/**
+ * removes negatives from an array of number O(n) not in place
+ * @param {Array|Number} arr an array of numbers
+ */
 function removeNegatives(arr){
     if(arr instanceof Array){
         let newArr = []
