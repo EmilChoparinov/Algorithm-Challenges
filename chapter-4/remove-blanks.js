@@ -1,3 +1,7 @@
+/**
+ * Removes blanks from the specified string
+ * @param {String} str 
+ */
 function removeBlanks(str){
     if(typeof str == 'string'){
         let noSpace = "";
