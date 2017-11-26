@@ -1,3 +1,7 @@
+/**
+ * Finds the sum of every 10 values and inserts every 10 O(n^2) solution
+ * @param {Array} arr 
+ */
 function intermediateSums(arr) {
     if (arr instanceof Array) {
         let addSum = function (index, sum){
