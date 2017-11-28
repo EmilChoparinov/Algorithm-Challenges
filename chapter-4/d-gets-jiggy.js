@@ -4,7 +4,7 @@ function dGetJiggy(str){
         let rest = "";
         for(let i = 1; i < str.length; i++){
             if(i == 1) rest += str[i].toUpperCase();
-            else nrest += str[i];
+            else rest += str[i];
         }
         return `${rest} to the ${lastLetter}!`;
     }
