@@ -1,3 +1,7 @@
+/**
+ * inverts a hash
+ * @param {Object} assocArr 
+ */
 function invertHash(assocArr){
     for(let i in assocArr){
         console.log(assocArr[i]);
