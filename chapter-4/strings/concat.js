@@ -1,3 +1,8 @@
+/**
+ * Concats strings together
+ * @param {String} str1 
+ * @param {String} str 
+ */
 function concat(str1, ...str) {
     if (typeof str1 == 'string') {
         str.forEach(element => {
