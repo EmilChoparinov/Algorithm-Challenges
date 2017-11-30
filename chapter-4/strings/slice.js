@@ -1,3 +1,8 @@
+/**
+ * find a substring of a string
+ * @param {Number} start 
+ * @param {Number} end 
+ */
 String.prototype.slice1 = function(start, end){
     let s = "";
     for(let i = start; i < end; i++){
