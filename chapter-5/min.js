@@ -33,19 +33,11 @@ class LinkedList {
     }
 
     /**
-     * returns the largest value of the list
+     * returns the minimum value of the list
      */
-    max(){
+    min(){
         let node = this.head;
-        let max = node;
-        while(node != null){
-            if(max.val < node.val){
-                max = node;
-            }
-            node = node.next;
-        }
-        if(max != null) return max.val;
-        return null;
+        let min = node;
     }
 }
 
@@ -55,7 +47,3 @@ class node {
         this.next = null;
     }
 }
-
-var list = new LinkedList();
-list.add(1).add(10).add(3).add(4);
-console.log(list.max());
