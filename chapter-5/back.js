@@ -1,4 +1,4 @@
-class LinkedListA {
+class LinkedList {
     constructor() {
         this.head = null;
     }
@@ -51,6 +51,6 @@ class node {
     }
 }
 
-var list = new LinkedListA();
+var list = new LinkedList();
 list.add(1).add(3).add(51).add(123);
 console.log(list.back());
