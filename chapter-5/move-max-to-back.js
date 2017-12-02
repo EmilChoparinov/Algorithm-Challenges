@@ -27,7 +27,8 @@ class LinkedList {
             s += node.val + ", ";
             node = node.next;
         }
-        s += node.val + " ]";
+        if(node != null) s += node.val;
+        s += " ]";
         return s;
     }
 
