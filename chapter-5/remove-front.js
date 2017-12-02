@@ -9,12 +9,20 @@ class LinkedList {
      * @param {Object} val 
      */
     add(val) {
-        var lastNode = this.head;
-        var addNode = new node(val);
+        let lastNode = this.head;
+        let addNode = new node(val);
         this.head = addNode;
         addNode.next = lastNode;
         if (this.back == null) this.back = addNode;
         return this;
+    }
+
+    removeFront() {
+        if (this.head != null) {
+            this.head = this.head.next;
+            return this;
+        }
+        throw new Error("List is empty");
     }
 
     print() {
@@ -32,3 +40,8 @@ class node {
         this.next = null;
     }
 }
+
+var list = new LinkedList();
+list.add(1).add(2).add(3);
+list.removeFront();
+list.print();
