@@ -25,8 +25,11 @@ class LinkedList {
         }
     }
 
+    /**
+     * Gets the first element of the list
+     */
     front(){
-        node = this.head();
+        node = this.head;
         if(node != null) return node.val;
         return null;
     }
@@ -38,3 +41,7 @@ class node {
         this.next = null;
     }
 }
+
+var list = new LinkedList();
+list.add(1).add(2).add(3).add(4);
+console.log(list.front());
