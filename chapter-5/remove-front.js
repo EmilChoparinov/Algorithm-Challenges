@@ -42,6 +42,6 @@ class node {
 }
 
 var list = new LinkedList();
-list.add(1).add(2).add(3);
+list.add(1).add(2).add(3).add(4);;
 list.removeFront();
 list.print();
