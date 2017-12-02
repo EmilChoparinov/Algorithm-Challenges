@@ -38,6 +38,14 @@ class LinkedList {
     min(){
         let node = this.head;
         let min = node;
+        while(node != null){
+            if(min.val > node.val){
+                min = node
+            }
+            node = node.next;
+        }
+        if(min != null) return min.val;
+        return null;
     }
 }
 
@@ -47,3 +55,7 @@ class node {
         this.next = null;
     }
 }
+
+var list = new LinkedList();
+list.add(1).add(-1).add(41).add(1).add(13);
+console.log(list.min());
