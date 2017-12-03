@@ -31,6 +31,28 @@ class LinkedList {
         s += " ]"
         return s;
     }
+
+    prependVal(val,before){
+        let node1 = new node(val);
+        let nodeA = this.head;
+        let beforeNode = nodeA;
+        while(nodeA != null){
+            if(nodeA.next != null){
+                if(nodeA.next.val == before){
+                    beforeNode = nodeA;
+                    break;
+                }
+            }
+            nodeA = nodeA.next;
+        }
+        if(beforeNode != null){
+            let temp = beforeNode.next;
+            beforeNode.next = node1;
+            node1.next = temp;
+        }else{
+            this.add(node1.val);
+        }
+    }
 }
 
 class node {
@@ -40,36 +62,7 @@ class node {
     }
 }
 
-/**
- * prepends a value to a linked list by head being considered first element
- * @param {LinkedList|Any} list 
- * @param {object} val the val to append
- * @param {Object} before the node
- */
-function prepend(list, val, before) {
-    if (list instanceof LinkedList) {
-        node1 = list.head;
-        while (node1 != null) {
-            if (node1.next != null) {
-                if (node1.next.val == before) {
-                    break;
-                }
-            }
-            node1 = node1.next;
-        }
-        if(node1 == null){
-            list.add(val);
-            return this;
-        }
-        let temp = node1.next;
-        let newNode = new node(val);
-        node1.next = newNode;
-        newNode.next = temp;
-        return this;
-    }
-}
 let list = new LinkedList();
-list.add(1).add(2).add(3).add(4).add(5);
-console.log(list.toString());
-prepend(list, 6, 5);
+list.add(5).add(4).add(3).add(2).add(1);
+list.prependVal(12, 3);
 console.log(list.toString());
