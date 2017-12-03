@@ -9,7 +9,7 @@ class LinkedList {
      */
     add(val) {
         var lastNode = this.head;
-        var addNode = new node1(val);
+        var addNode = new node(val);
         this.head = addNode;
         addNode.next = lastNode;
         if (this.back == null) this.back = addNode;
@@ -33,7 +33,7 @@ class LinkedList {
     }
 }
 
-class node1 {
+class node {
     constructor(val) {
         this.val = val;
         this.next = null;
