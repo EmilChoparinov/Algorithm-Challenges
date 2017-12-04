@@ -56,7 +56,7 @@ class LinkedList {
                     cNode = cNode.next;
                 }
             }
-        } 
+        }
         return this;
     }
 }
