@@ -47,22 +47,42 @@ class Queue {
      * @returns {Boolean}
      */
     contains(val) {
-        let nodeN =this.head;
-        while(nodeN){
-            if(nodeN.val == val) return true;
+        let nodeN = this.head;
+        while (nodeN) {
+            if (nodeN.val == val) return true;
             nodeN = nodeN.next;
         }
         return false;
     }
 
-    size(){
+    size() {
         let nodeN = this.head;
         let c = 0;
-        while(nodeN){
+        while (nodeN) {
             c++;
             nodeN = nodeN.next;
         }
         return c;
+    }
+
+    removeMinimum() {
+        if (this.head) {
+            let nodeN = this.head;
+            let minBeforePointer = nodeN;
+            let minValue = nodeN.val;
+            while (nodeN) {
+                if (nodeN.next) {
+                    if (minValue >= nodeN.next.val) {
+                        minValue = nodeN.next.val;
+                        minBeforePointer = nodeN;
+                    }
+                }
+                nodeN = nodeN.next;
+            }
+            console.log(minBeforePointer);
+            minBeforePointer.next = minBeforePointer.next.next;
+        }
+        return this;
     }
     /**
      * returns a formatted string of the list
@@ -89,6 +109,6 @@ class node {
 }
 
 var queue = new Queue();
-queue.enqueue(1).enqueue(2).enqueue(3);
-console.log(queue.size());
+queue.enqueue(7).enqueue(2).enqueue(5).enqueue(2).enqueue(4);
+queue.removeMinimum();
 console.log(queue.toString());
