@@ -4,7 +4,7 @@ class Queue {
     }
 
     /**
-     * Adds a value to the queue
+     * queues a value
      * @param {Object} val 
      */
     enqueue(val) {
@@ -16,6 +16,22 @@ class Queue {
         if (nodeN == null) this.head = new node(val);
         else nodeN.next = new node(val);
         return this;
+    }
+
+    /**
+     * dequeues a value
+     */
+    dequeue(){
+        if(this.head){
+            let nodeN = this.head;
+            this.head = nodeN.next;
+            return nodeN;
+        }
+    }
+
+    front(){
+        if(this.head){
+        }
     }
 
     /**
@@ -44,4 +60,5 @@ class node {
 
 var queue = new Queue();
 queue.enqueue(1).enqueue(2).enqueue(3);
+console.log(queue.front());
 console.log(queue.toString());
