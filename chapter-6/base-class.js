@@ -1,18 +1,20 @@
-class LinkedList {
+class Queue {
     constructor() {
         this.head = null;
     }
 
     /**
-     * Adds a value to the linked list
+     * queues a value
      * @param {Object} val 
      */
-    add(val) {
-        var lastNode = this.head;
-        var addNode = new node(val);
-        this.head = addNode;
-        addNode.next = lastNode;
-        if (this.back == null) this.back = addNode;
+    enqueue(val) {
+        let nodeN = this.head;
+        while (nodeN) {
+            if (!nodeN.next) break;
+            nodeN = nodeN.next;
+        }
+        if (nodeN == null) this.head = new node(val);
+        else nodeN.next = new node(val);
         return this;
     }
     
@@ -39,5 +41,5 @@ class node {
         this.next = null;
     }
 }
-let list = new LinkedList();
-console.log(list.toString());
+let queue = new Queue();
+console.log(queue.toString());
