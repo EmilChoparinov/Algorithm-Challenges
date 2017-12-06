@@ -55,6 +55,15 @@ class Queue {
         return false;
     }
 
+    size(){
+        let nodeN = this.head;
+        let c = 0;
+        while(nodeN){
+            c++;
+            nodeN = nodeN.next;
+        }
+        return c;
+    }
     /**
      * returns a formatted string of the list
      */
@@ -81,5 +90,5 @@ class node {
 
 var queue = new Queue();
 queue.enqueue(1).enqueue(2).enqueue(3);
-console.log(queue.contains(3), queue.contains(-3));
+console.log(queue.size());
 console.log(queue.toString());
