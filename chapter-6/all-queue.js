@@ -31,6 +31,12 @@ class Queue {
 
     front(){
         if(this.head){
+            let nodeN = this.head;
+            while(nodeN){
+                if(!nodeN.next) break;
+                nodeN = nodeN.next;
+            }
+            return nodeN;
         }
     }
 
