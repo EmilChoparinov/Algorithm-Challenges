@@ -20,4 +20,11 @@ class ArrStack{
         return removedValue;
     }
 
+    /**
+     * Gets the next value in the stack
+     */
+    top(){
+        return this.stack[this.stack.length - 1];
+    }
+
 }
