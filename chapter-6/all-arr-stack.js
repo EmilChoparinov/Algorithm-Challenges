@@ -27,4 +27,16 @@ class ArrStack{
         return this.stack[this.stack.length - 1];
     }
 
+    /**
+     * See if it contains a values
+     * @param {Any} val 
+     * @returns {Boolean}
+     */
+    contains(val){
+        this.stack.forEach(function(e){
+            if(e.val == val) return true;
+        });
+        return false;
+    }
+
 }
