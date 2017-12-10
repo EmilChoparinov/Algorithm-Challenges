@@ -31,6 +31,21 @@ class SLStack{
         }
         return false;
     }
+
+    isEmpty(){
+        return (this.head)? false : true;
+    }
+
+    size(){
+        let node = this.head;
+        let c = 0;
+        while(node){
+            c++;
+            node = node.next;
+        }
+        return c;
+    }
+    
     toString(){
         let node = this.head;
         let s = "[ ";
@@ -58,3 +73,4 @@ let linkedStack = new SLStack();
 linkedStack.push(1).push(2).push(3).pop();
 console.log(linkedStack.toString());
 console.log(linkedStack.contains(2), linkedStack.contains(3));
+console.log(linkedStack.isEmpty());
