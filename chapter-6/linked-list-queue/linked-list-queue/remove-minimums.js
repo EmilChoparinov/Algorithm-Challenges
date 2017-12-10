@@ -30,41 +30,8 @@ class Queue {
     }
 
     /**
-     * returns the next value to dequeue in the queues
+     * Removes the lowest miniumum value in the queue
      */
-    front() {
-        let nodeN = this.head;
-        while (nodeN) {
-            if (!nodeN.next) break;
-            nodeN = nodeN.next;
-        }
-        return nodeN;
-    }
-
-    /**
-     * see if value is queued up
-     * @param {Any} val 
-     * @returns {Boolean}
-     */
-    contains(val) {
-        let nodeN = this.head;
-        while (nodeN) {
-            if (nodeN.val == val) return true;
-            nodeN = nodeN.next;
-        }
-        return false;
-    }
-
-    size() {
-        let nodeN = this.head;
-        let c = 0;
-        while (nodeN) {
-            c++;
-            nodeN = nodeN.next;
-        }
-        return c;
-    }
-
     removeMinimum() {
         if (this.head) {
             let nodeN = this.head;
@@ -109,6 +76,3 @@ class node {
 }
 
 var queue = new Queue();
-queue.enqueue(7).enqueue(2).enqueue(5).enqueue(2).enqueue(4);
-queue.removeMinimum();
-console.log(queue.toString());

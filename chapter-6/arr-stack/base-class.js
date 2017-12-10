@@ -39,9 +39,16 @@ class ArrStack{
         return false;
     }
 
+    /**
+     * Finds out if the stack is empty
+     */
     isEmpty(){
         return (this.stack.length > 0)? false: true; 
     }
+
+    /**
+     * Get the stack size
+     */
     size(){
         return this.stack.length;
     }

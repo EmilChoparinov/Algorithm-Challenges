@@ -47,22 +47,42 @@ class Queue {
      * @returns {Boolean}
      */
     contains(val) {
-        let nodeN =this.head;
-        while(nodeN){
-            if(nodeN.val == val) return true;
+        let nodeN = this.head;
+        while (nodeN) {
+            if (nodeN.val == val) return true;
             nodeN = nodeN.next;
         }
         return false;
     }
 
-    size(){
+    size() {
         let nodeN = this.head;
         let c = 0;
-        while(nodeN){
+        while (nodeN) {
             c++;
             nodeN = nodeN.next;
         }
         return c;
+    }
+
+    removeMinimum() {
+        if (this.head) {
+            let nodeN = this.head;
+            let minBeforePointer = nodeN;
+            let minValue = nodeN.val;
+            while (nodeN) {
+                if (nodeN.next) {
+                    if (minValue >= nodeN.next.val) {
+                        minValue = nodeN.next.val;
+                        minBeforePointer = nodeN;
+                    }
+                }
+                nodeN = nodeN.next;
+            }
+            console.log(minBeforePointer);
+            minBeforePointer.next = minBeforePointer.next.next;
+        }
+        return this;
     }
     /**
      * returns a formatted string of the list
@@ -88,22 +108,4 @@ class node {
     }
 }
 
-function compareQueues(q1, q2){
-    if(q1 instanceof Queue && q2 instanceof Queue){
-        if(q1.size() != q2.size()) return false;
-        let q1Node = q1.head, q2Node = q2.head;
-        while(q1Node && q2Node){
-            if(q1Node.val != q2Node.val) return false;
-            q1Node = q1Node.next;
-            q2Node = q2Node.next;
-        }
-        return true;
-    }
-}
-
 var queue = new Queue();
-queue.enqueue(1).enqueue(2).enqueue(3);
-var queue2 = new Queue();
-queue2.enqueue(1).enqueue(2).enqueue(3);
-console.log(compareQueues(queue, queue2));
-console.log(queue.toString());
