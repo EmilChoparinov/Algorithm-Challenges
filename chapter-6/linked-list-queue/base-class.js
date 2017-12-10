@@ -13,8 +13,8 @@ class Queue {
             if (!nodeN.next) break;
             nodeN = nodeN.next;
         }
-        if (nodeN == null) this.head = new node(val);
-        else nodeN.next = new node(val);
+        if (nodeN == null) this.head = new Node(val);
+        else nodeN.next = new Node(val);
         return this;
     }
 
