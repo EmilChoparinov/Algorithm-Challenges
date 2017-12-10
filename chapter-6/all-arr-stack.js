@@ -42,6 +42,9 @@ class ArrStack{
     isEmpty(){
         return (this.stack.length > 0)? false: true; 
     }
+    size(){
+        return this.stack.length;
+    }
 }
 
 let stack = new ArrStack();
