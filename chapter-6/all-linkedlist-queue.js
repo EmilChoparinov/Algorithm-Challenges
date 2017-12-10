@@ -22,6 +22,15 @@ class SLStack{
     top(){
         return (this.head)? this.head.val : this.head;
     }
+
+    contains(val){
+        let node = this.head;
+        while(node){
+            if(node.val == val) return true;
+            node = node.next;
+        }
+        return false;
+    }
     toString(){
         let node = this.head;
         let s = "[ ";
@@ -48,4 +57,4 @@ class Node{
 let linkedStack = new SLStack();
 linkedStack.push(1).push(2).push(3).pop();
 console.log(linkedStack.toString());
-console.log(linkedStack.top());
+console.log(linkedStack.contains(2), linkedStack.contains(3));
