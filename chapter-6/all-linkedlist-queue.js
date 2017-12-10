@@ -11,6 +11,17 @@ class SLStack{
         return this;
     }
 
+    pop(){
+        let temp = this.head;
+        if(temp){
+            this.head = temp.next;
+        }
+        return this;
+    }
+
+    top(){
+        return (this.head)? this.head.val : this.head;
+    }
     toString(){
         let node = this.head;
         let s = "[ ";
@@ -19,7 +30,10 @@ class SLStack{
             s += node.val + ", ";
             node = node.next;
         }
-        s += node.val + " ]";
+        if(node){
+            s += node.val;
+        }
+        s += " ]";
         return s;
     }
 }
@@ -32,5 +46,6 @@ class Node{
 }
 
 let linkedStack = new SLStack();
-linkedStack.push(1).push(2).push(3);
+linkedStack.push(1).push(2).push(3).pop();
 console.log(linkedStack.toString());
+console.log(linkedStack.top());
