@@ -45,7 +45,7 @@ class SLStack{
         }
         return c;
     }
-    
+
     toString(){
         let node = this.head;
         let s = "[ ";
@@ -69,8 +69,20 @@ class Node{
     }
 }
 
+function CompareStacks(stack1, stack2){
+    if(stack1 instanceof SLStack && stack2 instanceof SLStack){
+        let node1 = stack1.head
+        let node2 = stack2.head;
+        while(node1 != null && node2 != null){
+            if(node1.val != node2.val) return false;
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+        if((node1&& !node2) || (!node1 && node2)) return false;
+        else return true;
+    }
+}
+
 let linkedStack = new SLStack();
 linkedStack.push(1).push(2).push(3).pop();
 console.log(linkedStack.toString());
-console.log(linkedStack.contains(2), linkedStack.contains(3));
-console.log(linkedStack.isEmpty());
