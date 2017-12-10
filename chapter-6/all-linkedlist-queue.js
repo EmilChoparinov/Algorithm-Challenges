@@ -81,6 +81,7 @@ function CompareStacks(stack1, stack2){
         if((node1&& !node2) || (!node1 && node2)) return false;
         else return true;
     }
+    
 }
 
 let linkedStack = new SLStack();
