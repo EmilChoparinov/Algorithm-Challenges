@@ -41,7 +41,15 @@ class SLStack {
      * Gets the value on top of the stack (next one to be popped)
      */
     top() {
-        return (this.head) ? this.head.val : this.head;
+        let node = this.head;
+        while(node){
+            if(!node.next) break;
+            node = node.next;
+        }
+        if(node){
+            return node.val;
+        }
+        return null;
     }
 
     /**
