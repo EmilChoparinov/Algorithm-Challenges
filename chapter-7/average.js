@@ -1,3 +1,7 @@
+/**
+ * Gets the average of the array
+ * @param {Array} arr 
+ */
 function average(arr){
     if(arr instanceof Array){
         let s = 0;
