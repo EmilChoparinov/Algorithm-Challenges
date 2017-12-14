@@ -2,7 +2,7 @@
  * Returns true if array can be balanced
  * @param {Array} arr 
  */
-function balancePoint(arr){
+function balanceIndex(arr){
     if(arr instanceof Array){
         let sumLeft = arr[0];
         let sumRight = arr[arr.length-1];
@@ -27,8 +27,8 @@ function balancePoint(arr){
 }
 
 var arr = [1,2,3,4,10];
-console.log(balancePoint(arr));
+console.log(balanceIndex(arr));
 
 
 var arr = [1,2,4,6,1];
-console.log(balancePoint(arr));
+console.log(balanceIndex(arr));
