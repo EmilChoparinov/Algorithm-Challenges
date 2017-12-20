@@ -27,7 +27,10 @@ class LinkedList {
             s += node.val + ", ";
             node = node.next;
         }
-        s += node.val + " ]";
+        if (node) {
+            s += node.val;
+        }
+        s += " ]";
         return s;
     }
 
@@ -43,7 +46,7 @@ class LinkedList {
         }
         if (node1) {
             node1.next = new Node(val);
-        }else{
+        } else {
             this.head = new Node(val);
         }
         return this;
