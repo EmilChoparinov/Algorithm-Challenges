@@ -3,11 +3,11 @@ let Node = reference.Node;
 let LinkedList = reference.LinkedList;
 
 /**
- * Shifts a list to the right by a certain value
+ * Shifts a list by a certain value
  * @param {LinkedList} list 
  * @param {Number} shiftBy 
  */
-function shiftRight(list, shiftBy) {
+function shift(list, shiftBy) {
     if (list instanceof LinkedList && typeof shiftBy == 'number') {
         let node1 = list.head;
         let node2 = list.head;
@@ -52,7 +52,7 @@ function shiftRight(list, shiftBy) {
 let list = new LinkedList();
 list.add(1).add(2).add(3).add(4);
 console.log(list.toString());
-shiftRight(list, 1);
+shift(list, 1);
 console.log(list.toString());
-shiftRight(list, -1);
+shift(list, -1);
 console.log(list.toString());
