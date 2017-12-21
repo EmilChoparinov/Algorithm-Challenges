@@ -51,8 +51,4 @@ function shift(list, shiftBy) {
 
 let list = new LinkedList();
 list.add(1).add(2).add(3).add(4);
-console.log(list.toString());
-shift(list, 1);
-console.log(list.toString());
-shift(list, -1);
-console.log(list.toString());
+console.log(JSON.stringify(list, null, 4));
