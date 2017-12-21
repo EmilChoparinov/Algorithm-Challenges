@@ -12,7 +12,6 @@ class LinkedList {
         var addNode = new Node(val);
         this.head = addNode;
         addNode.next = lastNode;
-        if (this.back == null) this.back = addNode;
         return this;
     }
 
