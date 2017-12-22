@@ -3,10 +3,10 @@ let Node = reference.Node;
 let LinkedList = reference.LinkedList;
 
 /**
- * Finds out if a linked list loops somewhere
+ * Gets the node that started the loop
  * @param {LinkedList} list 
  */
-function hasLoop(list) {
+function loopStart(list) {
     if (list instanceof LinkedList) {
         let node1 = list.head;
         let node2 = list.head;
@@ -14,19 +14,25 @@ function hasLoop(list) {
             node1 = node1.next;
             node2 = node2.next;
             if (node2) {
+                last = node2;
                 node2 = node2.next;
             } else {
-                break;
+                return null;
             }
-            if (node2 == node1) return true;
+            if (node2 == node1) {
+                node1 = list.head;
+                while (node1 != node2) {
+                    node1 = node1.next;
+                    node2 = node2.next;
+                }
+                return node1;
+            }
         }
-        return false;
     }
-    return false;
 }
 
 let list = new LinkedList();
-list.add(1).add(2).add(3).add(4);
+list.add(1).add(2).add(3).add(4)
 let node = list.head.next;
 let end = list.head;
 while (end) {
@@ -34,4 +40,4 @@ while (end) {
     end = end.next;
 }
 end.next = node;
-console.log(hasLoop(list));
+console.log(loopStart(list));
