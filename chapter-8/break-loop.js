@@ -44,3 +44,7 @@ while (end) {
 end.next = node;
 breakLoop(list)
 console.log(list.toString());
+
+module.exports = {
+    breakLoop : breakLoop
+}
