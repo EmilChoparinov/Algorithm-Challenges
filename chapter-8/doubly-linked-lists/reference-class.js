@@ -130,3 +130,8 @@ class DNode {
         this.val = val;
     }
 }
+
+module.exports = {
+    Node: DNode,
+    DLinkedList: DLinkedList,
+}
