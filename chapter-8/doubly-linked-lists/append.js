@@ -4,9 +4,9 @@ let DLinkedList = reference.DLinkedList;
 
 /**
  * appends a value after the existing value given
- * @param {DLinkedList} list 
- * @param {Any} val 
- * @param {Any} existingVal 
+ * @param {DLinkedList} list list to append to
+ * @param {Any} val value to append
+ * @param {Any} existingVal value to append after
  */
 function appendValue(list, val, existingVal) {
     if (list instanceof DLinkedList) {
