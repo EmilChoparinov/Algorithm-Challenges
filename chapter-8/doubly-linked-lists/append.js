@@ -3,12 +3,12 @@ let Node = reference.Node;
 let DLinkedList = reference.DLinkedList;
 
 /**
- * prepends a value to an existing list
+ * appends a value after the existing value given
  * @param {DLinkedList} list 
- * @param {Any} val item to add
- * @param {Any} existingVal item to add before
+ * @param {Any} val 
+ * @param {Any} existingVal 
  */
-function prependValue(list, val, existingVal) {
+function appendValue(list, val, existingVal) {
     if (list instanceof DLinkedList) {
         let newNode = new Node(val);
         let node = list.head;
@@ -17,24 +17,23 @@ function prependValue(list, val, existingVal) {
             node = node.next;
         }
         if (node) {
-            let bNode = node.prev;
-            if (bNode) {
-                bNode.next = newNode;
-                node.prev = newNode;
-                newNode.prev = bNode;
-                newNode.next = node;
+            let aNode = node.next;
+            if (aNode) {
+                node.next = newNode;
+                newNode.prev = node;
+                aNode.prev = newNode;
+                newNode.next = aNode;
             } else {
-                list.head = newNode;
-                newNode.next = node;
-                node.prev = newNode;
+                list.tail = newNode;
+                newNode.prev = node;
+                node.next = newNode;
             }
         }
-        return null;
     }
 }
 
 let list = new DLinkedList();
 list.push("a").push("b").push("c").push("d");
-prependValue(list, 1, "a");
-prependValue(list, 1, "c");
+appendValue(list, 1, "d");
+appendValue(list, 2, "b");
 console.log(list.toString(), list.toStringB());
