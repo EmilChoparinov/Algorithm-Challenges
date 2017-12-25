@@ -1,3 +1,8 @@
+/**
+ * binary search recursively by array
+ * @param {Array} arr 
+ * @param {Number} val 
+ */
 function rBinarySearch(arr, val) {
     let mid = arr[Math.floor(arr.length / 2)];
     if (mid == val) return true;
