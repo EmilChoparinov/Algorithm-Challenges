@@ -48,8 +48,12 @@ function loopify(list, n) {
     }
 }
 
-let list = new DLinkedList();
-list.push("a").push("b").push("c").push("d");
-console.log(isValid(list));
-loopify(list, 0);
-console.log(isValid(list));
+// let list = new DLinkedList();
+// list.push("a").push("b").push("c").push("d");
+// console.log(isValid(list));
+// loopify(list, 0);
+// console.log(isValid(list));
+
+module.exports = {
+    loopify : loopify
+}
