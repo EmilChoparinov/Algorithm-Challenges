@@ -4,6 +4,10 @@ let Node = reference.Node;
 let DLinkedList = reference.DLinkedList;
 let loopify = validity.loopify;
 
+/**
+ * repairs the list
+ * @param {DLinkedList} list 
+ */
 function repair(list) {
     if(list instanceof DLinkedList){
         if(list.tail){
