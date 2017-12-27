@@ -41,7 +41,24 @@ class BST {
 
 
     contains(val) {
-        
+        let node = this.root;
+        while (node) {
+            if (node.val == val) return true;
+            if (val > node.val) {
+                if (node.right) {
+                    node = node.right;
+                } else {
+                    return false;
+                }
+            }
+            else {
+                if (node.left) {
+                    node = node.left;
+                } else {
+                    return false;
+                }
+            }
+        }
     }
     min() {
 
@@ -58,3 +75,5 @@ class BST {
 }
 
 let tree = new BST();
+tree.add(5).add(4).add(6).add(2);
+console.log(JSON.stringify(tree, null, 4));
