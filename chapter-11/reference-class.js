@@ -71,16 +71,23 @@ class BST {
     }
 
     max() {
-
+        let node = this.root;
+        while (node) {
+            if (!node.right) break;
+            node = node.right;
+        }
+        return (node) ? node.val : null;
     }
-    size() {
 
+    size(node = this.root) {
+        if (!node) return 0;
+        return this.size(node.left) + this.size(node.right) + 1;
     }
     isEmpty() {
-
+        return (this.root) ? false : true;
     }
 }
 
 let tree = new BST();
 tree.add(5).add(4).add(6).add(2);
-console.log(tree.min());
+console.log(tree.isEmpty());
