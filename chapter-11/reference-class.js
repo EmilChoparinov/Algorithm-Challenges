@@ -162,4 +162,19 @@ class BST {
     isEmpty() {
         return (this.root) ? false : true;
     }
+
+    /**
+     * calculates the longest sequence from root to leaf
+     * @returns {Number} height of the tree
+     */
+    height(node = this.root) {
+        if (!node) return 0;
+        return Math.max(this.height(node.left), this.height(node.right)) + 1;
+    }
 }
+
+let tree = new BST();
+tree.add(60).add(41).add(74).add(16).add(53).add(65);
+tree.add(25).add(48).add(55).add(63).add(70);
+tree.add(42).add(62).add(64);
+console.log(tree.height());
