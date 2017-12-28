@@ -171,9 +171,73 @@ class BST {
         if (!node) return 0;
         return Math.max(this.height(node.left), this.height(node.right)) + 1;
     }
+
+    remove(val, node = this.root) {
+        if (!node) return false;
+        if (node.left) {
+            if (node.left.val == val) {
+                let xNode = node.left;
+                if (xNode.left && xNode.right) {
+                    let replaceNode = xNode;
+                    let beforeReplaceNode = null;
+                    replaceNode = replaceNode.left;
+                    while (replaceNode) {
+                        if(!replaceNode.right) break;
+                        beforeReplaceNode = replaceNode;
+                        replaceNode = replaceNode.right;
+                    }
+                    beforeReplaceNode.right = null;
+                    xNode.val = replaceNode.val;
+                }
+                else if (xNode.left || xNode.right) {
+                    node.left = null;
+                }
+                return true;
+            }
+        }
+        if (node.right) {
+            if (node.right.val == val) {
+                let xNode = node.right;
+                if (xNode.left && xNode.right) {
+                    let replaceNode = xNode;
+                    let beforeReplaceNode = null;
+                    replaceNode = replaceNode.left;
+                    while (replaceNode) {
+                        beforeReplaceNode = replaceNode;
+                        replaceNode = replaceNode.right;
+                    }
+                    beforeReplaceNode.right = null;
+                    xNode.val = replaceNode.val;
+                }
+                else if (xNode.left || xNode.right) {
+                    node.right = null;
+                }
+                return true;
+            }
+        }
+        if (val < node.val) {
+            return this.remove(val, node.left)
+        }
+        else {
+            return this.remove(val, node.left);
+        }
+    }
+
+    printVals(node = this.root) {
+        if (!node) return;
+        console.log(node.val);
+        this.printVals(node.left);
+        this.printVals(node.right);
+    }
 }
 
 module.exports = {
     BTNode: BTNode,
     BST: BST,
 }
+
+let tree = new BST();
+tree.add(60).add(41).add(18).add(25).add(53).add(48).add(42).add(55);
+tree.add(74).add(85).add(63).add(62).add(64).add(70);
+console.log(tree.remove(41));
+tree.printVals();
