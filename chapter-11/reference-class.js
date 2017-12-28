@@ -257,6 +257,13 @@ class BST {
         }
     }
 
+    /**
+     * clears the tree
+     */
+    removeAll() {
+        this.root = null;
+    }
+
     printVals(node = this.root) {
         if (!node) return;
         console.log(node.val);
@@ -269,9 +276,3 @@ module.exports = {
     BTNode: BTNode,
     BST: BST,
 }
-
-let tree = new BST();
-tree.add(60).add(41).add(18).add(25).add(53).add(48).add(42).add(55);
-tree.add(74).add(85).add(63).add(62).add(64).add(70);
-console.log(tree.remove(60));
-tree.printVals();
