@@ -23,7 +23,7 @@ class SLStack {
         if (temp) {
             this.head = temp.next;
         }
-        return this;
+        return (temp)? temp.val: null;
     }
 
     /**
@@ -114,6 +114,7 @@ function CompareStacks(stack1, stack2) {
     }
 }
 
-let linkedStack = new SLStack();
-linkedStack.push(1).push(2).push(3).pop();
-console.log(linkedStack.toString());
+module.exports = {
+    SLStack: SLStack,
+    Node: Node
+}
