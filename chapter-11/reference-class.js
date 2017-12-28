@@ -60,9 +60,16 @@ class BST {
             }
         }
     }
-    min() {
 
+    min() {
+        let node = this.root;
+        while (node) {
+            if (!node.left) break;
+            node = node.left;
+        }
+        return (node) ? node.val : null;
     }
+
     max() {
 
     }
@@ -76,4 +83,4 @@ class BST {
 
 let tree = new BST();
 tree.add(5).add(4).add(6).add(2);
-console.log(JSON.stringify(tree, null, 4));
+console.log(tree.min());
