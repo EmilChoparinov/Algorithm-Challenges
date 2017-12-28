@@ -172,25 +172,63 @@ class BST {
         return Math.max(this.height(node.left), this.height(node.right)) + 1;
     }
 
+    /**
+     * removes an item from the tree
+     * @param {Any} val item to remove
+     * @param {BTNode} node starting node
+     * @returns {Boolean} true if deletion successful, false if not
+     */
     remove(val, node = this.root) {
+        let removeWithLRNode = function (n) {
+            let xNode = n;
+            if (xNode.left && xNode.right) {
+                let replaceNode = xNode;
+                let beforeReplaceNode = null;
+                replaceNode = replaceNode.left;
+                while (replaceNode) {
+                    if (!replaceNode.right) break;
+                    beforeReplaceNode = replaceNode;
+                    replaceNode = replaceNode.right;
+                }
+                beforeReplaceNode.right = null;
+                xNode.val = replaceNode.val;
+            }
+        }
         if (!node) return false;
+        if (this.root.val == val) {
+            if (this.root.left && this.root.right) {
+                let replacer = this.root.left;
+                let bReplacer = null;
+                while (replacer) {
+                    if (!replacer.right) break;
+                    bReplacer = replacer;
+                    replacer = replacer.right;
+                }
+                bReplacer.right = null;
+                this.root.val = replacer.val;
+            }
+            else if (!this.root.left && !this.root.right) {
+                this.root = null;
+            }
+            else if (this.root.left || this.root.right) {
+                let w = (this.root.left) ? this.root.left : this.root.right;
+                this.root = w;
+            }
+            return true;
+        }
+
         if (node.left) {
             if (node.left.val == val) {
                 let xNode = node.left;
                 if (xNode.left && xNode.right) {
-                    let replaceNode = xNode;
-                    let beforeReplaceNode = null;
-                    replaceNode = replaceNode.left;
-                    while (replaceNode) {
-                        if(!replaceNode.right) break;
-                        beforeReplaceNode = replaceNode;
-                        replaceNode = replaceNode.right;
-                    }
-                    beforeReplaceNode.right = null;
-                    xNode.val = replaceNode.val;
+                    removeWithLRNode(node.left);
+                }
+                else if (!xNode.left && !xNode.right) {
+                    node.left = null;
                 }
                 else if (xNode.left || xNode.right) {
-                    node.left = null;
+                    let w = (xNode.left) ? xNode.left : xNode.right;
+                    node.left = w;
                 }
                 return true;
             }
@@ -199,18 +237,14 @@ class BST {
             if (node.right.val == val) {
                 let xNode = node.right;
                 if (xNode.left && xNode.right) {
-                    let replaceNode = xNode;
-                    let beforeReplaceNode = null;
-                    replaceNode = replaceNode.left;
-                    while (replaceNode) {
-                        beforeReplaceNode = replaceNode;
-                        replaceNode = replaceNode.right;
-                    }
-                    beforeReplaceNode.right = null;
-                    xNode.val = replaceNode.val;
+                    removeWithLRNode(node.right);
+                }
+                else if (!xNode.left && !xNode.right) {
+                    node.right = null;
                 }
                 else if (xNode.left || xNode.right) {
-                    node.right = null;
+                    let w = (xNode.left) ? xNode.left : xNode.right;
+                    node.right = w;
                 }
                 return true;
             }
@@ -239,5 +273,5 @@ module.exports = {
 let tree = new BST();
 tree.add(60).add(41).add(18).add(25).add(53).add(48).add(42).add(55);
 tree.add(74).add(85).add(63).add(62).add(64).add(70);
-console.log(tree.remove(41));
+console.log(tree.remove(60));
 tree.printVals();
