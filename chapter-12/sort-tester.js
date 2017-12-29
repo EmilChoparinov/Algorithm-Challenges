@@ -22,7 +22,7 @@ module.exports = function testSort(sortType, callback) {
         arrays.forEach(array => {
             let list = new LinkedList();
             array.forEach(value => list.add(value));
-            attempts.push(list);
+            attempts.push(callback(list));
             linkedLists.push(list);
         });
         attempts.forEach(attempt => {
@@ -45,17 +45,16 @@ module.exports = function testSort(sortType, callback) {
         });
     }
     if (sortType == 'array') {
-
+        arrays.forEach(array => attempts.push(callback(array)));
+        attempts.forEach(attempt => {
+            console.log("currently attempting... ", attempt);
+            for (let i = 0; i < attempt.length - 1; i++) {
+                if (attempt[i] > attempt[i + 1]) {
+                    console.log(`FAIL @ ${attempt[i]} -> ${attempt[i + 1]}`);
+                    return;
+                }
+            };
+            console.log("SUCCESS");
+        });
     }
-    arrays.forEach(array => attempts.push(callback(array)));
-    attempts.forEach(attempt => {
-        console.log("currently attempting... ", attempt);
-        for (let i = 0; i < attempt.length - 1; i++) {
-            if (attempt[i] > attempt[i + 1]) {
-                console.log(`FAIL @ ${attempt[i]} -> ${attempt[i + 1]}`);
-                return;
-            }
-        };
-        console.log("SUCCESS");
-    });
 }

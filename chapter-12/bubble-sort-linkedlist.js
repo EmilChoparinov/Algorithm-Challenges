@@ -19,15 +19,20 @@ function bubbleSort(list) {
                             prev.next = node2;
                             node1.next = node2.next;
                             node2.next = node1;
+                            prev = node2;
+                            node2 = node1.next;
                         } else {
                             list.head = node2;
-                            node2.next = node1;
                             node1.next = node2.next;
+                            node2.next = node1;
+                            prev = node2;
+                            node2 = node1.next;
                         }
+                    } else {
+                        prev = node1;
+                        node1 = node1.next;
+                        node2 = node2.next;
                     }
-                    prev = node1;
-                    node1 = node1.next;
-                    node2 = node2.next;
                 }
                 prev = null;
                 node1 = list.head;
