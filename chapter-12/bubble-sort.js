@@ -18,4 +18,4 @@ function bubbleSort(arr) {
     }
 }
 
-testSort(bubbleSort);
+testSort('array', bubbleSort);

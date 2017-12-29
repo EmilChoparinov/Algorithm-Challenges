@@ -10,6 +10,11 @@ let arrays = [
     [96, 53, 99, 100, 33, 51, 76, 9, 29, 89, 31, 91, 30, 94, 90]
 ];
 
+/**
+ * tests a sort
+ * @param {String} sortType linked | array
+ * @param {*} callback algorithim to test
+ */
 module.exports = function testSort(sortType, callback) {
     let attempts = [];
     if (sortType == 'linked') {

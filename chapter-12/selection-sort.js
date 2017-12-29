@@ -24,4 +24,4 @@ function getCurMinIndexAfter(arr, n) {
     return curMin;
 }
 
-testSort(selectionSort);
+testSort('array', selectionSort);
