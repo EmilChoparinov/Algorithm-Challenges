@@ -4,21 +4,15 @@ function insertionSort(arr) {
     if (arr instanceof Array) {
         let hasChanged;
         for (let sortedToIndex = 0; sortedToIndex < arr.length; sortedToIndex++) {
-            for (let i = 0; i < sortedToIndex; i++) {
-                if (arr[sortedToIndex] < arr[i]) {
-                    swap(arr, sortedToIndex, i);
-                }
+            let t = arr[sortedToIndex];
+            let c = sortedToIndex - 1;
+            while (c >= 0 && arr[c] > t) {
+                arr[c + 1] = arr[c];
+                c--;
             }
+            arr[c + 1] = t;
         }
         return arr;
-    }
-}
-
-function swap(arr, place1, place2) {
-    if (arr instanceof Array && typeof place1 == 'number' && typeof place2 == 'number') {
-        let t = arr[place1];
-        arr[place1] = arr[place2];
-        arr[place2] = t;
     }
 }
 
