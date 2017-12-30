@@ -2,7 +2,6 @@ const testSort = require("./sort-tester");
 
 function insertionSort(arr) {
     if (arr instanceof Array) {
-        let hasChanged;
         for (let sortedToIndex = 0; sortedToIndex < arr.length; sortedToIndex++) {
             let t = arr[sortedToIndex];
             let c = sortedToIndex - 1;
