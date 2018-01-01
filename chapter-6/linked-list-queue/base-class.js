@@ -101,11 +101,14 @@ class Queue {
     }
 }
 
-class node {
+class Node {
     constructor(val) {
         this.val = val;
         this.next = null;
     }
 }
 
-var queue = new Queue();
+module.exports = {
+    Node: Node,
+    Queue: Queue,
+}
