@@ -16,6 +16,12 @@ function unionSortedArrays(arr1, arr2) {
                 j++;
             }
         }
+
+        let lastArr = (i < arr1.length) ? arr1 : arr2;
+        let lastI = (i < arr1.length) ? i : j;
+        for (lastI; lastI < lastArr.length; lastI++) {
+            arr.push(lastArr[lastI]);
+        }
         return arr;
     }
 }
