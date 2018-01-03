@@ -11,8 +11,13 @@ function unionUnsortedArrays(a, b) {
             ai++;
             bi++;
         }
+        let last = (ai < a.length) ? a : b;
+        let lastI = (ai < a.length) ? ai : bi;
+        for (lastI; lastI < last.length; lastI++) {
+            arr.push(last[lastI]);
+        }
         return arr;
     }
 }
 
-console.log(unionUnsortedArrays([2, 7, 2, 1, 2], [6, 7, 2, 7, 6, 2]));
+console.log(unionUnsortedArrays([2, 7, 2, 1, 2], [6, 7, 2, 7, 6, 9]));
