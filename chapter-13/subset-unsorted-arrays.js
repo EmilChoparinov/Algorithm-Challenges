@@ -13,4 +13,4 @@ function subsetUnsortedArrays(a, b) {
     }
 }
 
-console.log(subsetUnsortedArrays([4, 1, 9, 7, 10, 14], [1, 7, 7]))
+console.log(subsetUnsortedArrays([4, 1, 9, 7, 10, 14], [1, 8, 7]))
