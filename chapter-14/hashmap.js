@@ -51,9 +51,15 @@ class HashMap {
     isEmpty() {
         return (this.elements > 0) ? false : true;
     }
+
+    remove(key) {
+        let index = this.getIndex(this.hashify(key), this.capactiy);
+        let value = this.table[index];
+        this.table[index] = undefined;
+        return (value) ? value : null;
+    }
 }
 
 let hashmap = new HashMap(3);
 hashmap.add("myKey", 42).add("aKey", "foo");
 console.log(hashmap + "");
-console.log(hashmap.find("myKey"));
