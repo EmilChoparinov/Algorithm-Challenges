@@ -142,7 +142,7 @@ class HashMap {
         for (let i = 0; i < value.length; i++) {
             if (value[i].key == key) {
                 n = value[i];
-                value[i] = undefined;
+                value[i] = [];
                 break;
                 this.elements--;
             }
@@ -158,7 +158,7 @@ class HashMap {
         this.capacity = this.closestLargestPrime(this.capacity);
         for (let i = 0; i < this.table.length; i++) {
             let currentBucket = this.table[i];
-            this.table[i] = undefined;
+            this.table[i] = [];
             if (currentBucket) {
                 currentBucket.forEach(item => {
                     this.elements--;
@@ -202,7 +202,7 @@ class HashMap {
         this.capacity = capacity;
         for (let i = 0; i < this.table.length; i++) {
             let currentBucket = this.table[i];
-            this.table[i] = undefined;
+            this.table[i] = [];
             if (currentBucket) {
                 currentBucket.forEach(item => {
                     this.elements--;
