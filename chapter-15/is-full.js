@@ -1,7 +1,6 @@
 let reference = require("../chapter-11/reference-class");
 let BST = reference.BST;
 let BTNode = reference.BTNode;
-
 function isFull(node) {
     if (!node) return true;
     if (!node.left && !node.right) return true;
