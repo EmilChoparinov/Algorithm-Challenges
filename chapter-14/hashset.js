@@ -1,4 +1,4 @@
-class HashMultiSet {
+class HashSet {
 
     constructor(capacity) {
         this.table = [];
@@ -66,6 +66,10 @@ class HashMultiSet {
         if (!this.table[index]) {
             this.table[index] = [];
             this.elements++;
+        }
+        let t = this.table[index];
+        for (let i = 0; i < t.length; i++) {
+            if (t[i] == value) return this;
         }
         this.table[index].push(value);
         return this;
@@ -169,7 +173,7 @@ class HashMultiSet {
     }
 }
 
-let multiset = new HashMultiSet(3);
-multiset.add("hello").add("test").add("20").add("3").add("tester").add("test");
+let set = new HashSet(3);
+set.add("hello").add("test").add("20").add("3").add("tester").add("test");
 
-console.log(multiset.toString());
+console.log(set.toString());
