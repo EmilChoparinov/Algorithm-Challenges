@@ -23,6 +23,7 @@ class HashMap {
     }
 
     add(key, val) {
+        if (this.loadFactor() > .75) this.grow();
         let index = this.getIndex(this.hashify(key), this.capactiy);
         this.table[index] = new KeyValuePair(key, val);
         this.elements++;
@@ -86,8 +87,13 @@ class HashMap {
                         this.elements++;
                     }
                 }
+                if (this.loadFactor() > .75) this.grow();
             }
         }
+    }
+
+    loadFactor() {
+        return this.elements / this.capactiy;
     }
 }
 
@@ -107,3 +113,4 @@ hashmap2.add("myKey", 42).add("aKey", "foo");
 hashmap.addMap(hashmap2);
 hashmap.add("20", 50)
 console.log(hashmap + "");
+console.log(hashmap.loadFactor());
