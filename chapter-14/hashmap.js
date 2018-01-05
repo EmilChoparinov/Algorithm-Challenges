@@ -70,6 +70,25 @@ class HashMap {
             }
         }
     }
+
+    addMap(hashmap, overwrite) {
+        if (hashmap instanceof HashMap) {
+            let table = hashmap.table;
+            for (let i = 0; i < table.length; i++) {
+                if (table[i]) {
+                    let nextIndex = this.getIndex(this.hashify(table[i].key), this.capactiy);
+                    if (this.table[nextIndex] && overwrite) {
+                        this.table[nextIndex] = new KeyValuePair(table[i].key, table[i].value);
+                        this.elements++;
+                    }
+                    else if (!this.table[nextIndex]) {
+                        this.table[nextIndex] = new KeyValuePair(table[i].key, table[i].value);
+                        this.elements++;
+                    }
+                }
+            }
+        }
+    }
 }
 
 class KeyValuePair {
@@ -82,6 +101,9 @@ class KeyValuePair {
     }
 }
 
-let hashmap = new HashMap(3);
-hashmap.add("myKey", 42).add("aKey", "foo");
+let hashmap = new HashMap(10);
+let hashmap2 = new HashMap(3);
+hashmap2.add("myKey", 42).add("aKey", "foo");
+hashmap.addMap(hashmap2);
+hashmap.add("20", 50)
 console.log(hashmap + "");
