@@ -259,15 +259,3 @@ class KeyValuePair {
         return this.value;
     }
 }
-
-let hashmap = new HashMap(3);
-hashmap.add("myKey", 42).add("aKey", "foo");
-hashmap.add("20", 50);
-hashmap.add("test", "hello");
-hashmap.grow();
-hashmap.grow();
-hashmap.setSize(100000);
-console.log(hashmap.remove("aKey"));
-console.log(hashmap.find("aKey"));
-// console.log(hashmap.selectKeys("myKey", "aKey", "20", "test", "hello"));
-console.log(hashmap.toString());
