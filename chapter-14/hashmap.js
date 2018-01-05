@@ -72,9 +72,9 @@ class HashMap {
         if (this.loadFactor() > .75) this.grow();
         let index = this.getIndex(this.hashify(key));
         if (!this.table[index]) {
-            this.elements++;
             this.table[index] = [];
         }
+        if (this.table[index].length == 0) this.elements++;
         this.table[index].push(new KeyValuePair(key, val));
         return this;
     }
@@ -142,9 +142,13 @@ class HashMap {
         for (let i = 0; i < value.length; i++) {
             if (value[i].key == key) {
                 n = value[i];
-                value[i] = [];
+                if (value.length == 1) {
+                    this.elements--;
+                    this.table[index] = [];
+                    break;
+                }
+                value[i] = undefined;
                 break;
-                this.elements--;
             }
         }
         return (n) ? n.value : null;
@@ -160,10 +164,12 @@ class HashMap {
             let currentBucket = this.table[i];
             this.table[i] = [];
             if (currentBucket) {
-                currentBucket.forEach(item => {
+                if (currentBucket.length > 0) {
                     this.elements--;
-                    this.add(item.key, item.value);
-                });
+                    currentBucket.forEach(item => {
+                        this.add(item.key, item.value);
+                    });
+                }
             }
         }
     }
@@ -197,17 +203,18 @@ class HashMap {
      * @param {Number} capacity new capacity
      */
     setSize(capacity) {
-        if (capacity < this.elements) throw new RangeError("capacity given is less than element count");
         capacity = this.closestLargestPrime(capacity);
         this.capacity = capacity;
         for (let i = 0; i < this.table.length; i++) {
             let currentBucket = this.table[i];
             this.table[i] = [];
             if (currentBucket) {
-                currentBucket.forEach(item => {
+                if (currentBucket.length > 0) {
                     this.elements--;
-                    this.add(item.key, item.value);
-                });
+                    currentBucket.forEach(item => {
+                        this.add(item.key, item.value);
+                    });
+                }
             }
         }
         this.table.length = capacity;
@@ -259,3 +266,12 @@ class KeyValuePair {
         return this.value;
     }
 }
+
+let hashmap = new HashMap(3);
+
+hashmap.add("test", 30).add("20", 40).add("Hello", "hi");
+hashmap.grow();
+hashmap.grow();
+hashmap.grow();
+console.log(hashmap.elements);
+console.log(hashmap.toString());
