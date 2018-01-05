@@ -75,10 +75,17 @@ class HashSet {
         return this;
     }
 
+    /**
+     * checks if the table is empty
+     */
     isEmpty() {
         return (this.elements > 0) ? false : true;
     }
 
+    /**
+     * removes the given value from the table
+     * @param {String} key 
+     */
     remove(value) {
         let index = this.getIndex(this.hashify(value));
         let item = this.table[index];
@@ -98,10 +105,16 @@ class HashSet {
         return (n) ? n : null;
     }
 
+    /**
+     * calculates the current load factor
+     */
     loadFactor() {
         return this.elements / this.capacity;
     }
 
+    /**
+     * grows the array approximately double the size
+     */
     grow() {
         this.capacity *= 2;
         this.capacity = this.closestLargestPrime(this.capacity);
@@ -119,6 +132,10 @@ class HashSet {
         }
     }
 
+    /**
+     * sets the capacity of the table to approximately the capacity given
+     * @param {Number} capacity new capacity
+     */
     setSize(capacity) {
         this.capacity = this.closestLargestPrime(capacity);
         for (let i = 0; i < this.table.length; i++) {
@@ -137,6 +154,10 @@ class HashSet {
         }
     }
 
+    /**
+     * checks if the set contains this value
+     * @param {Any} value 
+     */
     contains(value) {
         let index = this.getIndex(this.hashify(value));
         let bucket = this.table[index];
@@ -148,6 +169,9 @@ class HashSet {
         return false;
     }
 
+    /**
+     * returns the string representation of the HashSet class
+     */
     toString() {
         let s = "[ ";
         for (let i = 0; i < this.table.length - 1; i++) {
