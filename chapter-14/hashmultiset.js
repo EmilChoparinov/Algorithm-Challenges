@@ -147,6 +147,4 @@ class HashMultiSet {
 let multiset = new HashMultiSet(3);
 multiset.add("hello").add("test").add("20").add("3").add("tester");
 
-console.time("test");
 console.log(multiset.contains("test"));
-console.timeEnd("test");
