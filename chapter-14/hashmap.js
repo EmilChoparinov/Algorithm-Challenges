@@ -1,12 +1,18 @@
+/**
+ * HashMap datastructure base class
+ */
 class HashMap {
-    constructor(capactiy) {
+    constructor(capacity) {
         this.table = [];
-        capactiy = this.closestLargestPrime(capactiy)
-        this.capactiy = capactiy;
-        this.table.length = capactiy;
+        capacity = this.closestLargestPrime(capacity)
+        this.capacity = capacity;
         this.elements = 0;
     }
 
+    /**
+     * finds the next prime number from a given lower bound n
+     * @param {Number} n current number
+     */
     closestLargestPrime(n) {
         while (!this.isPrime(n)) {
             n++;
@@ -14,6 +20,11 @@ class HashMap {
         return n;
     }
 
+    /**
+     * finds if a number is prime
+     * O(sqrt(n)/2) time
+     * @param {Number} n number to check
+     */
     isPrime(n) {
         if (typeof n == 'number') {
             if (n == 2) return true;
@@ -25,6 +36,10 @@ class HashMap {
         }
     }
 
+    /**
+     * simple hash for a given key string
+     * @param {String} string 
+     */
     hashify(string) {
         if (typeof string == 'string') {
             var hash = 0;
@@ -38,13 +53,24 @@ class HashMap {
         }
     }
 
-    getIndex(value, div) {
+    /**
+     * gets the index where an item should be placed in the hashtable
+     * @param {Number} value hashed number
+     * @param {Number} div divisor (usually the capacity)
+     */
+    getIndex(value, div = this.capacity) {
         return (value % div + div) % div;
     }
 
+
+    /**
+     * adds an item to the hashtable
+     * @param {String} key key to add to the hash
+     * @param {Any} val value to be stored
+     */
     add(key, val) {
         if (this.loadFactor() > .75) this.grow();
-        let index = this.getIndex(this.hashify(key), this.capactiy);
+        let index = this.getIndex(this.hashify(key));
         if (!this.table[index]) {
             this.elements++;
             this.table[index] = [];
@@ -53,69 +79,105 @@ class HashMap {
         return this;
     }
 
+    /**
+     * returns the string representation of the hashmap class
+     */
     toString() {
         let s = "[ ";
         for (let i = 0; i < this.table.length - 1; i++) {
             if (this.table[i]) {
-                this.table[i].forEach(value => s += `${value.value}, `);
+                this.table[i].forEach(value => {
+                    if (value) {
+                        s += `${value}, `
+                    }
+                });
             }
         }
         if (this.table[this.table.length - 1]) {
-            for (let i = 0; i < this.table[this.table - 1].length - 1; i++) {
-                s += `${this.table[this.table.length - 1][i].value}, `;
-            }
             let a = this.table[this.table.length - 1];
+            for (let i = 0; i < a.length - 1; i++) {
+                if (a[i]) {
+                    s += `${a[i]}, `;
+                }
+            }
             s += `${a[a.length - 1]} `;
         }
         s += "]";
         return s;
     }
 
+    /**
+     * finds the given value from a given key O(1) time, O(n) if collision occurs
+     * @param {String} key 
+     */
     find(key) {
-        let index = this.getIndex(this.hashify(key), this.capactiy);
+        let index = this.getIndex(this.hashify(key), this.capacity);
         let values = this.table[index];
         if (values) {
             for (let i = 0; i < values.length; i++) {
                 let v = values[i];
-                if (v.key == key) return v;
+                if (v) {
+                    if (v.key == key) return v;
+                }
             }
         }
         return null;
     }
 
+    /**
+     * checks if the table is empty
+     */
     isEmpty() {
         return (this.elements > 0) ? false : true;
     }
 
+    /**
+     * removes the given value from the table
+     * @param {String} key 
+     */
     remove(key) {
-        let index = this.getIndex(this.hashify(key), this.capactiy);
+        let index = this.getIndex(this.hashify(key), this.capacity);
         let value = this.table[index];
-        this.table[index] = undefined;
-        this.elements--;
-        return (value) ? value : null;
+        let n;
+        for (let i = 0; i < value.length; i++) {
+            if (value[i].key == key) {
+                n = value[i];
+                value[i] = undefined;
+                break;
+                this.elements--;
+            }
+        }
+        return (n) ? n.value : null;
     }
 
+    /**
+     * grows the array approximately double the size
+     */
     grow() {
-        this.capactiy *= 2;
-        this.capactiy = this.closestLargestPrime(this.capactiy);
+        this.capacity *= 2;
+        this.capacity = this.closestLargestPrime(this.capacity);
         for (let i = 0; i < this.table.length; i++) {
-            let curVal = this.table[i];
+            let currentBucket = this.table[i];
             this.table[i] = undefined;
-            if (curVal) {
-                curVal.forEach(v => {
+            if (currentBucket) {
+                currentBucket.forEach(item => {
                     this.elements--;
-                    this.add(v.key, v.value);
+                    this.add(item.key, item.value);
                 });
             }
         }
     }
 
+    /**
+     * take all values of a given hashmap and add them to this hashmap
+     * @param {HashMap} hashmap 
+     */
     addMap(hashmap) {
         if (hashmap instanceof HashMap) {
             let table = hashmap.table;
             for (let i = 0; i < table.length; i++) {
                 if (table[i]) {
-                    let nextIndex = this.getIndex(this.hashify(table[i].key), this.capactiy);
+                    let nextIndex = this.getIndex(this.hashify(table[i].key), this.capacity);
                     if (this.table[nextIndex]) {
                         this.table[nextIndex].push(new KeyValuePair(table[i].key, table[i].value));
                     }
@@ -130,44 +192,69 @@ class HashMap {
         }
     }
 
-    setSize(capactiy) {
-        if (capactiy < this.elements) throw new RangeError("capacity given is less than element count");
-        capactiy = this.closestLargestPrime(capactiy);
-        this.capactiy = capactiy;
+    /**
+     * sets the capacity of the table to approximately the capacity given
+     * @param {Number} capacity new capacity
+     */
+    setSize(capacity) {
+        if (capacity < this.elements) throw new RangeError("capacity given is less than element count");
+        capacity = this.closestLargestPrime(capacity);
+        this.capacity = capacity;
         for (let i = 0; i < this.table.length; i++) {
-            let curVal = this.table[i];
+            let currentBucket = this.table[i];
             this.table[i] = undefined;
-            if (curVal) {
-                curVal.forEach(v => {
+            if (currentBucket) {
+                currentBucket.forEach(item => {
                     this.elements--;
-                    this.add(v.key, v.value);
+                    this.add(item.key, item.value);
                 });
             }
         }
-        this.table.length = capactiy;
+        this.table.length = capacity;
     }
 
+    /**
+     * calculates the current load factor
+     */
     loadFactor() {
-        return this.elements / this.capactiy;
+        return this.elements / this.capacity;
     }
 
+    /**
+     * select an n amount of keys from the table
+     * @param {...String} keys 
+     * @returns {Array} an array of the values stored
+     */
     selectKeys(...keys) {
         let values = [];
         for (let i = 0; i < keys.length; i++) {
-            let k = this.find(keys[i]);
-            if (k) {
-                values.push(k.value);
+            let item = this.find(keys[i]);
+            if (item) {
+                values.push(item.value);
             }
         }
         return values;
     }
 }
 
+/**
+ * key value datastructure for HashMaps
+ */
 class KeyValuePair {
+
+    /**
+     * KeyValuePair constructor
+     * @param {String} key the key to be used to retrieve the values
+     * @param {Any} value the value to be stored at the key place
+     */
     constructor(key, value) {
         this.key = key;
         this.value = value;
     }
+
+    /**
+     * returns the string representation of the KeyValuePair class
+     */
     toString() {
         return this.value;
     }
@@ -179,6 +266,8 @@ hashmap.add("20", 50);
 hashmap.add("test", "hello");
 hashmap.grow();
 hashmap.grow();
-hashmap.setSize(12);
-console.log(hashmap.selectKeys("myKey", "aKey", "20", "test", "hello"));
-console.log(hashmap.table);
+hashmap.setSize(100000);
+console.log(hashmap.remove("aKey"));
+console.log(hashmap.find("aKey"));
+// console.log(hashmap.selectKeys("myKey", "aKey", "20", "test", "hello"));
+console.log(hashmap.toString());
