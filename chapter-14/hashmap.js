@@ -24,7 +24,7 @@ class HashMap {
 
     add(key, val) {
         let index = this.getIndex(this.hashify(key), this.capactiy);
-        this.table[index] = val;
+        this.table[index] = new KeyValuePair(key, val);
         this.elements++;
         return this;
     }
@@ -56,7 +56,29 @@ class HashMap {
         let index = this.getIndex(this.hashify(key), this.capactiy);
         let value = this.table[index];
         this.table[index] = undefined;
+        this.elements--;
         return (value) ? value : null;
+    }
+
+    grow() {
+        this.capactiy *= 2;
+        for (let i = 0; i < this.table.length; i++) {
+            let curVal = this.table[i];
+            this.table[i] = undefined;
+            if (curVal) {
+                this.add(curVal.key, curVal.value);
+            }
+        }
+    }
+}
+
+class KeyValuePair {
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+    }
+    toString() {
+        return this.value;
     }
 }
 
