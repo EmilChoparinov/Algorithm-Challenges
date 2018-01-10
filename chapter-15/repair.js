@@ -2,46 +2,61 @@ var reference = require('../chapter-11/reference-class');
 var BST = reference.BST;
 let BTNode = reference.BTNode;
 
-function repairTree(node) {
-    var firstViolation, secondViolation, last;
-    let repair = function (node) {
-        if (!node) return;
-        repair(node.left);
-        if (last) {
-            // console.log(`${node.val} -> ${last.val}`);
-            if (node.val < last.val) {
-                if (!firstViolation) {
-                    firstViolation = last;
-                }
-                else {
-                    secondViolation = node;
-                    let i = firstViolation.val;
-                    firstViolation.val = secondViolation.val;
-                    secondViolation.val = i;
-                    firstViolation = secondViolation = null;
-                }
-            }
-        }
-        last = node;
-        repair(node.right);
-    };
-    repair(node);
-    // console.log(firstViolation, secondViolation, b);
+function repairTree(tree) {
+    let t = [];
+    dumpValuesTo(t, tree.root);
+    quicksort(t);
+    tree.root = null;
+    dumpValuesInto(t, tree);
 }
 
-function inOrderPrint(node) {
-    let s = '[ ';
-    let f = function stringify(node) {
-        if (node instanceof BTNode) {
-            stringify(node.left);
-            s += ` ${node.val} `;
-            stringify(node.right);
-        }
-    };
-    f(node);
-    s += ' ]';
-    return s;
+function dumpValuesTo(t, node) {
+    if (!node) return;
+    dumpValuesTo(t, node.left);
+    t.push(node.val);
+    dumpValuesTo(t, node.right);
 }
+
+function dumpValuesInto(t, tree, start = 0, end = t.length - 1) {
+    if (start > end) return;
+    let mid = (start + end) / 2;
+    tree.add(t[mid]);
+    dumpValuesInto(t, tree, start, mid - 1);
+    dumpValuesInto(t, tree, mid + 1, end);
+}
+
+function quicksort(arr, left = 0, right = arr.length - 1) {
+    if (left >= right) return;
+    let index = partition(arr, left, right);
+    quicksort(arr, left, index - 1);
+    quicksort(arr, index, right);
+    return arr;
+}
+
+function partition(arr, left, right) {
+    let pivot = arr[Math.round(Math.random() * (arr.length - 1))];
+    while (left <= right) {
+        while (arr[left] < pivot) {
+            left++;
+        }
+        while (arr[right] > pivot) {
+            right--;
+        }
+        if (left <= right) {
+            swap(arr, left, right);
+            left++;
+            right--;
+        }
+    }
+    return left;
+}
+
+function swap(arr, i, j) {
+    let t = arr[i];
+    arr[i] = arr[j];
+    arr[j] = t;
+}
+
 let t = new BTNode(10);
 t.left = new BTNode(5);
 t.right = new BTNode(8);
@@ -52,6 +67,6 @@ t.right.left = new BTNode(36);
 
 let tree = new BST();
 tree.root = t;
-console.log(inOrderPrint(t));
+// console.log(tree.toString());
 repairTree(tree);
-console.log(inOrderPrint(t));
+console.log(tree.toString());
