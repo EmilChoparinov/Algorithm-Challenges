@@ -78,6 +78,7 @@ class TrieTree {
 
     getWords() {
         let getFromRoot = function (node, words = [], currentString = '') {
+            if (!node) return;
             if (node.nodes.length == 0) {
                 currentString += node.val;
                 words.push(currentString);
@@ -151,6 +152,28 @@ class TrieTree {
         }
         return word;
     }
+
+    remove(str) {
+        let node = this.findNode(this.root, str[0]);
+        let findNode = this.findNode;
+        let flag = false;
+        let recurse = function (node, str, pointers = { fragment: false }) {
+            if (node && node.nodes.length == 0) return;
+            let next = findNode(node.nodes, str[0]);
+            recurse(next, str.slice(1), pointers);
+            if (node.nodes.length > 1) {
+                pointers.fragment = true;
+            }
+            else if (!pointers.fragment) {
+                delete node.nodes[0];
+                flag = true;
+            }
+        };
+        if (node) {
+            recurse(node, str.slice(1));
+        }
+        return flag;
+    }
 }
 
 let tree = new TrieTree();
@@ -166,7 +189,11 @@ tree.insert('hell');
 tree.insert('hell');
 tree.insert('hello');
 tree.insert('cost');
+tree.insert('costed');
+tree.insert('costing');
 tree.insert('said');
 // console.log(JSON.stringify(tree, null, 4));
 console.log(tree.getWords());
-console.log(tree.last());
+console.log(tree.remove('costed'));
+console.log(tree.getWords());
+// console.log(JSON.stringify(tree, null, 4));
