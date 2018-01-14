@@ -112,17 +112,42 @@ class TrieTree {
         }
         return true;
     }
+
+    /**
+     * gets first words by alphabetical-lowest order
+     */
+    first() {
+        let word = '';
+        let getLowestNode = function (nodeArray) {
+            let node = nodeArray[0];
+            for (let i = 1; i < nodeArray.length; i++) {
+                if (nodeArray[i].val < node.val) node = nodeArray[i];
+            }
+            return node;
+        };
+        let node = getLowestNode(this.root);
+        while (node) {
+            word += node.val;
+            node = getLowestNode(node.nodes);
+        }
+        return word;
+    }
 }
 
 let tree = new TrieTree();
-console.log(tree.insert('code'));
-console.log(tree.insert('code'));
-console.log(tree.insert('call'));
-console.log(tree.insert('corner'));
-console.log(tree.insert('hell'));
-console.log(tree.insert('hell'));
-console.log(tree.insert('hello'));
-console.log(tree.insert('cost'));
-console.log(tree.insert('said'));
+tree.insert('code');
+
+tree.insert('code');
+tree.insert('call');
+tree.insert('abacadabra');
+tree.insert('ababa');
+tree.insert('another');
+tree.insert('corner');
+tree.insert('hell');
+tree.insert('hell');
+tree.insert('hello');
+tree.insert('cost');
+tree.insert('said');
 // console.log(JSON.stringify(tree, null, 4));
 console.log(tree.getWords());
+console.log(tree.first());
