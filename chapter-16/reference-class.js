@@ -132,6 +132,25 @@ class TrieTree {
         }
         return word;
     }
+    /**
+     * gets first words by alphabetical-lowest order
+     */
+    last() {
+        let word = '';
+        let getHighestNode = function (nodeArray) {
+            let node = nodeArray[0];
+            for (let i = 1; i < nodeArray.length; i++) {
+                if (nodeArray[i].val > node.val) node = nodeArray[i];
+            }
+            return node;
+        };
+        let node = getHighestNode(this.root);
+        while (node) {
+            word += node.val;
+            node = getHighestNode(node.nodes);
+        }
+        return word;
+    }
 }
 
 let tree = new TrieTree();
@@ -150,4 +169,4 @@ tree.insert('cost');
 tree.insert('said');
 // console.log(JSON.stringify(tree, null, 4));
 console.log(tree.getWords());
-console.log(tree.first());
+console.log(tree.last());
