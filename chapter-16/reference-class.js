@@ -227,7 +227,38 @@ class TrieTree {
                 b = b.nodes[0];
             }
         }
-        return s;
+        return (s.length == 0) ? null : s;
+    }
+
+    /**
+     * search the tree and grab all results that relate to the string
+     * @param {String} str 
+     */
+    autocomplete(str) {
+        let s = '';
+        let node = this.findNode(this.root, str[0]);
+        let b = node;
+        let c = 1;
+        while (node) {
+            s += node.val;
+            b = node;
+            node = this.findNode(node.nodes, str[c]);
+            c++;
+        }
+        let getWordsAndAppend = function (node, currentString = '', words = []) {
+            if (!node) return words;
+            if (node.nodes.length == 0) {
+                currentString += node.val;
+                words.push(currentString);
+                return words;
+            }
+            currentString += node.val;
+            for (let n of node.nodes) {
+                getWordsAndAppend(n, currentString, words);
+            }
+            return words;
+        };
+        return getWordsAndAppend(b, s.slice(0, str.length - 1));
     }
 }
 
@@ -246,4 +277,4 @@ tree.insert('cost');
 tree.insert('costed');
 tree.insert('costing');
 tree.insert('said');
-console.log(tree.next('h'));
+console.log(tree.autocomplete(''));
