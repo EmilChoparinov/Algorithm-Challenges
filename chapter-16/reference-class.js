@@ -78,11 +78,11 @@ class TrieTree {
 
     getWords() {
         let getFromRoot = function (node, words = [], currentString = '') {
-            if (!node) return;
+            if (!node) return words;
             if (node.nodes.length == 0) {
                 currentString += node.val;
                 words.push(currentString);
-                return;
+                return words;
             }
             currentString += node.val;
             for (let n of node.nodes) {
@@ -153,19 +153,35 @@ class TrieTree {
         return word;
     }
 
+    /**
+     * remove a sequence of words in a tree, subwords are allowed
+     * @param {String} str 
+     * @returns {Object} {success, charRemoval}
+     */
     remove(str) {
         let node = this.findNode(this.root, str[0]);
         let findNode = this.findNode;
         let flag = false;
         let recurse = function (node, str, pointers = { fragment: false }) {
-            if (node && node.nodes.length == 0) return;
+            if (!node) return;
+            if (node.nodes.length == 0) return;
             let next = findNode(node.nodes, str[0]);
             recurse(next, str.slice(1), pointers);
-            if (node.nodes.length > 1) {
-                pointers.fragment = true;
-            }
-            else if (!pointers.fragment) {
-                delete node.nodes[0];
+            let nodesLength = node.nodes.length;
+            if (!pointers.fragment) {
+                if (str.length == 0) node.nodes = [];
+                else {
+                    let temp = [];
+                    for (let i = 0; i < node.nodes.length; i++) {
+                        if (str[0] != node.nodes[i].val) {
+                            temp.push(node.nodes[i]);
+                        }
+                    }
+                    if (temp.length > 0) {
+                        pointers.fragment = true;
+                    }
+                    node.nodes = temp;
+                }
                 flag = true;
             }
         };
@@ -194,6 +210,8 @@ tree.insert('costing');
 tree.insert('said');
 // console.log(JSON.stringify(tree, null, 4));
 console.log(tree.getWords());
-console.log(tree.remove('costed'));
+// console.log(tree.remove('code'));
+console.log(tree.remove('cost'));
+console.log(tree.remove('corn'));
 console.log(tree.getWords());
 // console.log(JSON.stringify(tree, null, 4));
