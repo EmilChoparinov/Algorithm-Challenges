@@ -258,6 +258,7 @@ class TrieTree {
             }
             return words;
         };
+        if (str == '') return this.getWords();
         return getWordsAndAppend(b, s.slice(0, str.length - 1));
     }
 }
