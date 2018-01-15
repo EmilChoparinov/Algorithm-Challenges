@@ -190,6 +190,19 @@ class TrieTree {
         }
         return flag;
     }
+
+    /**
+     * returns the max size of the tree
+     * @param {Array | TrieNode} nodes starting point
+     */
+    size(nodes = this.root) {
+        if (nodes.length == 0) return 0;
+        let c = 0;
+        for (let i = 0; i < nodes.length; i++) {
+            c += this.size(nodes[i].nodes) + 1;
+        }
+        return c;
+    }
 }
 
 let tree = new TrieTree();
@@ -197,21 +210,15 @@ tree.insert('code');
 
 tree.insert('code');
 tree.insert('call');
-tree.insert('abacadabra');
-tree.insert('ababa');
-tree.insert('another');
-tree.insert('corner');
-tree.insert('hell');
-tree.insert('hell');
-tree.insert('hello');
-tree.insert('cost');
-tree.insert('costed');
-tree.insert('costing');
-tree.insert('said');
-// console.log(JSON.stringify(tree, null, 4));
-console.log(tree.getWords());
-// console.log(tree.remove('code'));
-console.log(tree.remove('cost'));
-console.log(tree.remove('corn'));
-console.log(tree.getWords());
-// console.log(JSON.stringify(tree, null, 4));
+// tree.insert('abacadabra');
+// tree.insert('ababa');
+// tree.insert('another');
+// tree.insert('corner');
+// tree.insert('hell');
+// tree.insert('hell');
+// tree.insert('hello');
+// tree.insert('cost');
+// tree.insert('costed');
+// tree.insert('costing');
+// tree.insert('said');
+console.log(tree.size());
