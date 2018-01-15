@@ -270,6 +270,23 @@ class BST {
         this.printVals(node.left);
         this.printVals(node.right);
     }
+
+    /**
+     * returns the string representation of the binary tree class
+     */
+    toString() {
+        let s = '[ ';
+        let f = function stringify(node) {
+            if (node instanceof BTNode) {
+                stringify(node.left);
+                s += ` ${node.val} `;
+                stringify(node.right);
+            }
+        };
+        f(this.root);
+        s += ' ]';
+        return s;
+    }
 }
 
 module.exports = {

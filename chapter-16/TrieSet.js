@@ -5,7 +5,7 @@ class TrieNode {
     }
 }
 
-class TrieTree {
+class TrieSet {
     constructor() {
         this.root = [];
     }
@@ -258,7 +258,7 @@ class TrieTree {
     }
 }
 
-let tree = new TrieTree();
+let tree = new TrieSet();
 tree.insert('code');
 tree.insert('code');
 tree.insert('call');
