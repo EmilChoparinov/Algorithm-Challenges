@@ -203,22 +203,47 @@ class TrieTree {
         }
         return c;
     }
+
+    /**
+     * given a certain string, find the closest matching one, null if root doesnt contain the same char
+     * @param {String} str string to search with
+     * @returns {String} the closest string to it in the trie
+     */
+    next(str) {
+        let s = '';
+        let node = this.findNode(this.root, str[0]);
+        let b = node;
+        let c = 1;
+        while (node) {
+            s += node.val;
+            b = node;
+            node = this.findNode(node.nodes, str[c]);
+            c++;
+        }
+        if (b) {
+            b = b.nodes[0];
+            while (b) {
+                s += b.val;
+                b = b.nodes[0];
+            }
+        }
+        return s;
+    }
 }
 
 let tree = new TrieTree();
 tree.insert('code');
-
 tree.insert('code');
 tree.insert('call');
-// tree.insert('abacadabra');
-// tree.insert('ababa');
-// tree.insert('another');
-// tree.insert('corner');
-// tree.insert('hell');
-// tree.insert('hell');
-// tree.insert('hello');
-// tree.insert('cost');
-// tree.insert('costed');
-// tree.insert('costing');
-// tree.insert('said');
-console.log(tree.size());
+tree.insert('abacadabra');
+tree.insert('ababa');
+tree.insert('another');
+tree.insert('corner');
+tree.insert('hell');
+tree.insert('hell');
+tree.insert('hello');
+tree.insert('cost');
+tree.insert('costed');
+tree.insert('costing');
+tree.insert('said');
+console.log(tree.next('h'));
