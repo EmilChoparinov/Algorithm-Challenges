@@ -2,6 +2,7 @@ class TrieNode {
     constructor(val) {
         this.val = val;
         this.nodes = [];
+        this.occurrences = 0;
     }
 }
 
@@ -51,9 +52,8 @@ class TrieTree {
      */
     insert(str) {
         if (typeof str == 'string') {
-            let node = this.findNode(this.root, str[0]);
-            if (!node) {
-                node = this.root;
+            if (!this.findNode(this.root, str[0])) {
+                let node = this.root;
                 node.push(new TrieNode(str[0]));
                 node = node[node.length - 1];
                 for (let i = 1; i < str.length; i++) {
@@ -62,6 +62,7 @@ class TrieTree {
                 }
                 return true;
             } else {
+                let node = this.findNode(this.root, str[0]);
                 let before = this.root, c = 1;
                 while (node) {
                     before = node;
@@ -76,35 +77,26 @@ class TrieTree {
         return false;
     }
 
-    /**
-     * gets all subwords of a current trie node
-     * @param {TrieNode} node starting node
-     * @param {String} currentString string to append to each word
-     * @param {Array} words an array of words generated from the tree
-     * @returns {Array} the array of words
-     */
-    getWordsFromNode(node, currentString = '', words = []) {
-        if (!node) return words;
-        if (node.nodes.length == 0) {
-            currentString += node.val;
-            words.push(currentString);
-            return words;
-        }
-        currentString += node.val;
-        for (let n of node.nodes) {
-            this.getWordsFromNode(n, currentString, words);
-        }
-        return words;
-    }
-
-    /**
-     * gets all the words in the tree
-     */
     getWords() {
+        let getFromRoot = function (node, words = [], currentString = '') {
+            if (!node) return words;
+            if (node.nodes.length == 0) {
+                currentString += node.val;
+                words.push(currentString);
+                return words;
+            }
+            currentString += node.val;
+            for (let n of node.nodes) {
+                getFromRoot(n, words, currentString);
+            }
+            return words;
+        };
+
         let solutions = [];
         for (let node of this.root) {
-            let words = this.getWordsFromNode(node);
+            let words = getFromRoot(node);
             words.forEach((word) => solutions.push(word));
+
         }
         return solutions;
     }
@@ -253,8 +245,21 @@ class TrieTree {
             node = this.findNode(node.nodes, str[c]);
             c++;
         }
+        let getWordsAndAppend = function (node, currentString = '', words = []) {
+            if (!node) return words;
+            if (node.nodes.length == 0) {
+                currentString += node.val;
+                words.push(currentString);
+                return words;
+            }
+            currentString += node.val;
+            for (let n of node.nodes) {
+                getWordsAndAppend(n, currentString, words);
+            }
+            return words;
+        };
         if (str == '') return this.getWords();
-        return this.getWordsFromNode(b, s.slice(0, str.length - 1));
+        return getWordsAndAppend(b, s.slice(0, str.length - 1));
     }
 }
 
@@ -273,4 +278,4 @@ tree.insert('cost');
 tree.insert('costed');
 tree.insert('costing');
 tree.insert('said');
-console.log(tree.autocomplete('cost'));
+console.log(tree.autocomplete(''));
