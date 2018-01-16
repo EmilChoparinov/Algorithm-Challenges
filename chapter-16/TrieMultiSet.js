@@ -40,9 +40,13 @@ class TrieMultiSet {
                 node.nodes.push(new TrieNode(str[i]));
                 node = node.nodes[node.nodes.length - 1];
             }
-            let lastNode = new TrieNode(str[str.length - 1]);
-            lastNode.occurrences++;
-            node.nodes.push(lastNode);
+            if (str.length > 1) {
+                let lastNode = new TrieNode(str[str.length - 1]);
+                lastNode.occurrences++;
+                node.nodes.push(lastNode);
+            } else {
+                trieNode.nodes[trieNode.nodes.length - 1].occurrences++;
+            }
             return true;
         }
         return false;
@@ -97,11 +101,12 @@ class TrieMultiSet {
         if (node.occurrences > 0) {
             currentString += node.val;
             for (let i = 0; i < node.occurrences; i++) {
-                words.push(currentString);
+                words.push({ word: currentString, occurrences: node.occurrences });
             }
             // return words;
+        } else {
+            currentString += node.val;
         }
-        currentString += node.val;
         for (let n of node.nodes) {
             this.getWordsFromNode(n, currentString, words);
         }
@@ -115,7 +120,7 @@ class TrieMultiSet {
         let solutions = [];
         for (let node of this.root) {
             let words = this.getWordsFromNode(node);
-            words.forEach((word) => solutions.push(word));
+            words.forEach((word) => solutions.push(word.word));
         }
         return solutions;
     }
@@ -128,10 +133,10 @@ class TrieMultiSet {
     contains(str) {
         let node = this.findNode(this.root, str[0]);
         for (let i = 1; i < str.length; i++) {
-            if (!node) return false;
+            if (!node) return 0;
             node = this.findNode(node.nodes, str[i]);
         }
-        return true;
+        return node.occurrences;
     }
 
     /**
@@ -176,7 +181,7 @@ class TrieMultiSet {
     /**
      * remove a sequence of words in a tree, subwords are allowed
      * @param {String} str 
-     * @returns {Object} {success, charRemoval}
+     * @returns {Number} count of the previous occurance before operation
      */
     remove(str) {
         let node = this.findNode(this.root, str[0]);
@@ -184,10 +189,9 @@ class TrieMultiSet {
         let prevCount = 0;
         let recurse = function (node, str, pointers = { fragment: false }) {
             if (!node) return;
-            if (node.nodes.length == 0) return;
             let next = findNode(node.nodes, str[0]);
             recurse(next, str.slice(1), pointers);
-            if (node.occurrences > 0) {
+            if (!pointers.fragment && node.occurrences > 0) {
                 node.occurrences--;
                 pointers.fragment = true;
                 prevCount = node.occurrences + 1;
@@ -247,6 +251,37 @@ class TrieMultiSet {
      * @param {String} str 
      */
     autocomplete(str) {
+        let quickSort = function (arr, start = 0, end = arr.length) {
+            let swap = function (arr, i, j) {
+                let t = arr[i];
+                arr[i] = arr[j];
+                arr[j] = t;
+            };
+            let partition = function (arr, start, end) {
+                let piv = arr[end - 1];
+                let j = start;
+                for (let i = start; i < end; i++) {
+                    if (arr[i].occurrences >= piv.occurrences) {
+                        swap(arr, i, j);
+                        j++;
+                    }
+                }
+                return j;
+            };
+            if (start >= end) return arr;
+            let piv = partition(arr, start, end);
+            quickSort(arr, piv + 1, end);
+            quickSort(arr, start, piv - 1);
+            return arr;
+        };
+        if (str == '') {
+            let sol = [];
+            for (let node of this.root) {
+                let words = this.getWordsFromNode(node);
+                words.forEach((word) => sol.push(word));
+            }
+            return quickSort(sol);
+        }
         let s = '';
         let node = this.findNode(this.root, str[0]);
         let b = node;
@@ -257,29 +292,31 @@ class TrieMultiSet {
             node = this.findNode(node.nodes, str[c]);
             c++;
         }
-        if (str == '') return this.getWords();
-        return this.getWordsFromNode(b, s.slice(0, str.length - 1));
+        let words = this.getWordsFromNode(b, s.slice(0, str.length - 1));
+        return quickSort(words);
     }
 }
 
 let tree = new TrieMultiSet();
 tree.insert('code');
 tree.insert('code');
-// tree.insert('code');
-// tree.insert('coding');
-// tree.insert('call');
-// tree.insert('abacadabra');
-// tree.insert('ababa');
-// tree.insert('another');
-// tree.insert('corner');
-// tree.insert('hell');
-// tree.insert('hell');
-// tree.insert('hello');
-// tree.insert('cost');
-// tree.insert('costed');
-// tree.insert('costing');
-// tree.insert('said');
-console.log(tree.remove('code'));
-console.log(tree.getWords());
+tree.insert('code');
+tree.insert('coding');
+tree.insert('coding');
+tree.insert('coding');
+tree.insert('call');
+tree.insert('abacadabra');
+tree.insert('ababa');
+tree.insert('another');
+tree.insert('corner');
+tree.insert('hell');
+tree.insert('hell');
+tree.insert('hello');
+tree.insert('cost');
+tree.insert('costed');
+tree.insert('costing');
+tree.insert('said');
+// console.log(tree.contains('cost'));
+console.log(tree.autocomplete(''));
 // console.log(JSON.stringify(tree, null, 4));
 // console.log(tree.autocomplete('cost'));
