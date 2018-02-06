@@ -10,6 +10,13 @@ class ALEdge {
     }
 }
 
+class SNode {
+    constructor(node, prev) {
+        this.node = node;
+        this.prev = prev;
+    }
+}
+
 class ALGraph {
     constructor() {
         this.graph = {};
@@ -102,31 +109,60 @@ class ALGraph {
             return a;
         }
     }
+
+    performExistSearch(vertID1, vertID2) {
+        const reference = require('./../chapter-6/linked-list-queue/base-class');
+        const Queue = reference.Queue;
+        const queue = new Queue();
+
+        queue.enqueue(vertID1);
+        const visitedNodes = new Set();
+
+        while (queue.head) {
+            const vertex = queue.dequeue().val;
+            visitedNodes.add(vertex);
+            if (vertex == vertID2) {
+                return true;
+            }
+            for (const ver in this.graph[vertex]) {
+                if (!visitedNodes.has(ver)) {
+                    queue.enqueue(ver);
+                }
+            }
+        }
+        return false;
+    }
 }
 
-const graph = new ALGraph();
-graph.addVertex('A');
-graph.addVertex('B');
-graph.addVertex('C');
-graph.addVertex('D');
-graph.addVertex('E');
+// const graph = new ALGraph();
+// graph.addVertex('A');
+// graph.addVertex('B');
+// graph.addVertex('C');
+// graph.addVertex('D');
+// graph.addVertex('E');
+// graph.addVertex('F');
 
-graph.addEdge('A', 'B');
-graph.addEdge('A', 'C');
+// graph.addEdge('A', 'B');
+// graph.addEdge('A', 'D');
+// graph.addEdge('A', 'E');
+// graph.addEdge('B', 'A');
+// graph.addEdge('B', 'F');
+// graph.addEdge('C', 'F');
+// graph.addEdge('D', 'E');
+// graph.addEdge('D', 'A');
+// graph.addEdge('D', 'F');
+// graph.addEdge('E', 'A');
+// graph.addEdge('E', 'F');
+// graph.addEdge('E', 'D');
+// graph.addEdge('F', 'B');
+// graph.addEdge('F', 'E');
+// graph.addEdge('F', 'D');
+// graph.addEdge('F', 'C');
 
-graph.addEdge('B', 'C');
+// console.log(graph.performExistSearch('A', 'C'));
 
-graph.addEdge('C', 'D');
-
-graph.addEdge('D', 'A');
-
-graph.addEdge('E', 'A');
-graph.addEdge('E', 'D');
-graph.addEdge('E', 'C');
-
-
-graph.setEdgeValue('E', 'A', 100);
-graph.setVertexValue('A', 50);
-
-graph.removeVertex('C');
-console.log(graph.neighbors('E'));
+module.exports = {
+    ALEdge: ALEdge,
+    ALGraph: ALGraph,
+    ALVertex: ALVertex
+};

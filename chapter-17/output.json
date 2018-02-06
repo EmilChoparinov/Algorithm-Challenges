@@ -1,0 +1,181 @@
+{
+    "graph": {
+        "A": {
+            "vertexValue": null,
+            "B": {
+                "value": null
+            },
+            "F": {
+                "value": null
+            },
+            "C": {
+                "value": null
+            },
+            "D": {
+                "value": null
+            },
+            "H": {
+                "value": null
+            },
+            "E": {
+                "value": null
+            }
+        },
+        "B": {
+            "vertexValue": null,
+            "F": {
+                "value": null
+            }
+        },
+        "C": {
+            "vertexValue": null,
+            "D": {
+                "value": null
+            },
+            "G": {
+                "value": null
+            }
+        },
+        "D": {
+            "vertexValue": null,
+            "H": {
+                "value": null
+            },
+            "N": {
+                "value": null
+            }
+        },
+        "E": {
+            "vertexValue": null,
+            "B": {
+                "value": null
+            },
+            "O": {
+                "value": null
+            },
+            "I": {
+                "value": null
+            }
+        },
+        "F": {
+            "vertexValue": null,
+            "C": {
+                "value": null
+            },
+            "K": {
+                "value": null
+            }
+        },
+        "G": {
+            "vertexValue": null,
+            "D": {
+                "value": null
+            }
+        },
+        "H": {
+            "vertexValue": null,
+            "E": {
+                "value": null
+            },
+            "O": {
+                "value": null
+            }
+        },
+        "I": {
+            "vertexValue": null,
+            "T": {
+                "value": null
+            },
+            "P": {
+                "value": null
+            }
+        },
+        "J": {
+            "vertexValue": null,
+            "P": {
+                "value": null
+            },
+            "Q": {
+                "value": null
+            }
+        },
+        "K": {
+            "vertexValue": null,
+            "C": {
+                "value": null
+            }
+        },
+        "L": {
+            "vertexValue": null,
+            "C": {
+                "value": null
+            }
+        },
+        "M": {
+            "vertexValue": null,
+            "N": {
+                "value": null
+            },
+            "D": {
+                "value": null
+            },
+            "G": {
+                "value": null
+            }
+        },
+        "N": {
+            "vertexValue": null,
+            "H": {
+                "value": null
+            }
+        },
+        "O": {
+            "vertexValue": null
+        },
+        "P": {
+            "vertexValue": null,
+            "T": {
+                "value": null
+            }
+        },
+        "Q": {
+            "vertexValue": null,
+            "F": {
+                "value": null
+            }
+        },
+        "R": {
+            "vertexValue": null,
+            "L": {
+                "value": null
+            },
+            "K": {
+                "value": null
+            }
+        },
+        "S": {
+            "vertexValue": null,
+            "G": {
+                "value": null
+            },
+            "L": {
+                "value": null
+            }
+        },
+        "T": {
+            "vertexValue": null,
+            "F": {
+                "value": null
+            },
+            "B": {
+                "value": null
+            },
+            "E": {
+                "value": null
+            },
+            "Q": {
+                "value": null
+            }
+        }
+    }
+}
