@@ -1,6 +1,6 @@
 # Algorithm Challenges
 This is a collection of my answers to Martin Puryears Algorithim Challenges book. Although I have completed most solutions,
-I cannot guarentee that all cases will work for I have may not though of one. All my solutions are written in JavaScript
+I cannot guarantee that all cases will work since I **can't** test every single case. All my solutions are written in JavaScript
 
 # Contents
 The table of contents for ease of navigation
